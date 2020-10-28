@@ -1,0 +1,41 @@
+name: bulk_sms_sender
+description: Flutter Project by Riora.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  sms_maintained:
+    git:
+      url: https://github.com/andreimc/flutter_sms.git
+  csv: ^4.0.3
+  cupertino_icons: ^1.0.0
+  file_picker: ^1.13.3
+  flutter_xlider: ^3.4.0
+  path: ^1.7.0
+  provider: ^4.3.2+2
+  shared_preferences: ^0.5.12+2
+  sqflite: ^1.3.1+2
+  url_launcher: ^5.7.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.7.5
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/background/
