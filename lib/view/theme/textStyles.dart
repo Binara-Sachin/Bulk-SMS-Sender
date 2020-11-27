@@ -3,23 +3,20 @@ import 'package:bulk_sms_sender/view/theme/fontSizes.dart';
 import 'package:flutter/material.dart';
 
 class AppTextStyles {
-  // static const TextStyle white_heading01 = TextStyle(
-  //   fontSize: AppFontSizes.heading01,
-  //   // fontWeight: FontWeight.bold,
-  //   color: AppColors.secondaryFontColor,
-  // );
+  static const TextStyle white_heading01 = TextStyle(
+    fontSize: AppFontSizes.heading01,
+    color: AppColors.secondaryFontColor,
+  );
 
-  // static const TextStyle white_heading02 = TextStyle(
-  //   fontSize: AppFontSizes.heading02,
-  //   // fontWeight: FontWeight.bold,
-  //   color: AppColors.secondaryFontColor,
-  // );
+  static const TextStyle white_heading02 = TextStyle(
+    fontSize: AppFontSizes.heading02,
+    color: AppColors.secondaryFontColor,
+  );
 
-  // static const TextStyle white_heading03 = TextStyle(
-  //   fontSize: AppFontSizes.heading03,
-  //   // fontWeight: FontWeight.bold,
-  //   color: AppColors.secondaryFontColor,
-  // );
+  static const TextStyle white_heading03 = TextStyle(
+    fontSize: AppFontSizes.heading03,
+    color: AppColors.secondaryFontColor,
+  );
 
   static const TextStyle white_body01 = TextStyle(
     fontSize: AppFontSizes.body01,

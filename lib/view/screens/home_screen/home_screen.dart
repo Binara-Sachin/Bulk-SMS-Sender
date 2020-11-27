@@ -12,55 +12,17 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _pageIndex = 0;
-  int _animationDuration = 500;
 
-  PageController _pageController = PageController(initialPage: 0);
-
-  void _animateToPage(int index) {
-    setState(() {
-      _pageIndex = index;
-      _pageController.animateToPage(_pageIndex,
-          curve: Curves.ease,
-          duration: Duration(milliseconds: _animationDuration));
-    });
-  }
-
-  void _onPageChange(int index) {
-    setState(() {
-      _pageIndex = index;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController.addListener(() {
-      print(_pageController.page.toString());
-      if (_pageIndex != _pageController.page.round()) {
-        setState(() {
-          _pageIndex = _pageController.page.round();
-        });
-      }
-    });
-  }
+  List<Widget> _pages = [
+    CampaignsPage(),
+    InstructionsPage(),
+    SettingsPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: PageView(
-          controller: _pageController,
-          onPageChanged: (index) {
-            _onPageChange(index);
-            //! setState() or markNeedsBuild() called during build.
-          },
-          children: <Widget>[
-            CampaignsPage(),
-            InstructionsPage(),
-            SettingsPage(),
-          ],
-        ),
-      ),
+      body: SafeArea(child: _pages[_pageIndex]),
       bottomNavigationBar: BottomAppBar(
         child: Container(
           height: 60.0,
@@ -75,7 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: "Campaigns",
                 showText: true,
                 onPressed: () {
-                  _animateToPage(0);
+                  setState(() {
+                    _pageIndex = 0;
+                  });
                 },
               ),
               BottomAppBarIcon(
@@ -85,7 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: "Instructions",
                 showText: true,
                 onPressed: () {
-                  _animateToPage(1);
+                  setState(() {
+                    _pageIndex = 1;
+                  });
                 },
               ),
               BottomAppBarIcon(
@@ -95,7 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: "Settings",
                 showText: false,
                 onPressed: () {
-                  _animateToPage(2);
+                  setState(() {
+                    _pageIndex = 2;
+                  });
                 },
               ),
             ],

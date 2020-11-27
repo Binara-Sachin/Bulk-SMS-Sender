@@ -4,6 +4,7 @@ class Campaign {
   final String msg;
   final Duration delayDuration;
   final List<String> addresses;
+  final DateTime lastRun;
 
   Campaign({
     this.id,
@@ -11,22 +12,8 @@ class Campaign {
     this.msg,
     this.delayDuration,
     this.addresses,
+    this.lastRun,
   });
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'campaignName': campaignName,
-      'msg': msg,
-      'delayDuration': delayDuration,
-      'mobileNumbers': addresses,
-    };
-  }
-
-  @override
-  String toString() {
-    return 'Dog{id: $id, campaignName: $campaignName, msg: $msg,delayDuration: $delayDuration, mobileNumbers: $addresses}';
-  }
 }
 
 final Campaign cleanCampaign = Campaign(
@@ -35,4 +22,5 @@ final Campaign cleanCampaign = Campaign(
   msg: "",
   addresses: null,
   delayDuration: Duration(seconds: 10),
+  lastRun: null,
 );

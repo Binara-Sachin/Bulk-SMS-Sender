@@ -1,7 +1,7 @@
 import 'package:bulk_sms_sender/core/model/campaign.dart';
 import 'package:bulk_sms_sender/core/provider/campaigns_model.dart';
 import 'package:bulk_sms_sender/core/provider/sender_model.dart';
-import 'package:bulk_sms_sender/core/services/csvImporter.dart';
+import 'package:bulk_sms_sender/core/services/csv_import.dart';
 import 'package:bulk_sms_sender/view/screens/campaign_screens/ongoing_campaign.dart';
 import 'package:bulk_sms_sender/view/theme/textStyles.dart';
 import 'package:bulk_sms_sender/view/widgets/appAlertDialogs.dart';
@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 
 class NewEditCampaign extends StatefulWidget {
   final Campaign campaign;
+  // final int head;
 
   const NewEditCampaign({Key key, this.campaign}) : super(key: key);
 
@@ -40,11 +41,11 @@ class _NewEditCampaignState extends State<NewEditCampaign> {
 
     if (_campaignID == -1) {
       _editing = false;
-      _campaignID = Provider.of<CampaignsModel>(context, listen: false)
-              .savedCampaigns
-              .last
-              .id +
-          1;
+      if (Provider.of<CampaignsModel>(context, listen: false).savedCampaigns.isEmpty) {
+        _campaignID = 0;
+      } else {
+        _campaignID = Provider.of<CampaignsModel>(context, listen: false).savedCampaigns.last.id + 1;
+      }
     }
   }
 
@@ -75,8 +76,7 @@ class _NewEditCampaignState extends State<NewEditCampaign> {
       ),
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.only(
-              top: 8.0, left: 18.0, right: 18.0, bottom: 18.0),
+          padding: const EdgeInsets.only(top: 8.0, left: 18.0, right: 18.0, bottom: 18.0),
           children: [
             TextField(
               controller: _nameController,
@@ -123,11 +123,6 @@ class _NewEditCampaignState extends State<NewEditCampaign> {
                                   setState(() {
                                     _addressList.removeAt(index);
                                   });
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text("Mobile number removed"),
-                                    ),
-                                  );
                                 },
                                 child: ListTile(
                                   title: Text(
@@ -175,7 +170,7 @@ class _NewEditCampaignState extends State<NewEditCampaign> {
                   child: IconButton(
                     color: Colors.white,
                     iconSize: 20,
-                    icon: Icon(Icons.clear_all),
+                    icon: Icon(Icons.delete),
                     onPressed: () {
                       showClearDialog(context, () {
                         clearNumbers();
@@ -274,20 +269,22 @@ class _NewEditCampaignState extends State<NewEditCampaign> {
                   onPressed: () {
                     if (_nameController.text == "") {
                       showErrorDialog(context, "Campaign name cannot be empty");
-                    } else if (_addressList == null ||
-                        _addressList.length == 0) {
+                    } else if (_addressList == null || _addressList.length == 0) {
                       showErrorDialog(context, "Please import mobile numbers");
                     } else {
-                      Provider.of<CampaignsModel>(context, listen: false)
-                          .saveCampaign(
+                      Provider.of<CampaignsModel>(context, listen: false).saveCampaign(
                         Campaign(
                           id: _campaignID,
                           campaignName: _nameController.text,
                           msg: _messageController.text,
                           delayDuration: Duration(seconds: _delayValue ~/ 1),
                           addresses: _addressList,
+                          lastRun: widget.campaign.lastRun == null ? DateTime.now() : widget.campaign.lastRun == null,
                         ),
                       );
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("Campaign Saved"),
+                      ));
                     }
                   },
                 ),
@@ -297,23 +294,20 @@ class _NewEditCampaignState extends State<NewEditCampaign> {
                     if (_addressList == null || _addressList.length == 0) {
                       showErrorDialog(context, "Please import mobile numbers");
                     } else if (_messageController.text == "") {
-                      showErrorDialog(
-                          context, "Please type a message to be sent");
+                      showErrorDialog(context, "Please type a message to be sent");
                     } else {
-                      Provider.of<SenderModel>(context, listen: false)
-                          .setCampaign(
-                        Campaign(
-                          id: _campaignID,
-                          campaignName: _nameController.text,
-                          msg: _messageController.text,
-                          delayDuration: Duration(seconds: _delayValue ~/ 1),
-                          addresses: _addressList,
-                        ),
-                      );
+                      Provider.of<SenderModel>(context, listen: false).setCampaign(
+                          Campaign(
+                            id: _campaignID,
+                            campaignName: _nameController.text,
+                            msg: _messageController.text,
+                            delayDuration: Duration(seconds: _delayValue ~/ 1),
+                            addresses: _addressList,
+                            lastRun: widget.campaign.lastRun == null ? DateTime.now() : widget.campaign.lastRun == null,
+                          ),
+                          0);
                       Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => OngoingCampaign()),
-                          (Route<dynamic> route) => false);
+                          MaterialPageRoute(builder: (context) => OngoingCampaign()), (Route<dynamic> route) => false);
                     }
                   },
                 ),

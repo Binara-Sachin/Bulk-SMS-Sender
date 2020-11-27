@@ -5,6 +5,7 @@ import 'package:bulk_sms_sender/view/screens/campaign_screens/ongoing_campaign.d
 import 'package:bulk_sms_sender/view/theme/textStyles.dart';
 import 'package:bulk_sms_sender/view/widgets/appAlertDialogs.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import 'roundedButton.dart';
@@ -51,6 +52,17 @@ class CampaignCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           Divider(),
+          Text(
+            "Last Run",
+            style: AppTextStyles.grey_body01,
+          ),
+          Text(
+            campaign.lastRun == null
+                ? "Never"
+                : DateFormat('yyyy LLLL dd - EEEE\n').add_jms().format(campaign.lastRun).toString(),
+            style: AppTextStyles.black_body01,
+          ),
+          Divider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -84,8 +96,7 @@ class CampaignCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            NewEditCampaign(campaign: campaign),
+                        builder: (context) => NewEditCampaign(campaign: campaign),
                       ),
                     );
                   },
@@ -94,12 +105,9 @@ class CampaignCard extends StatelessWidget {
               RoundedButton(
                 title: "Send",
                 onPressed: () {
-                  Provider.of<SenderModel>(context, listen: false)
-                      .setCampaign(campaign);
+                  Provider.of<SenderModel>(context, listen: false).setCampaign(campaign, 0);
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                          builder: (context) => OngoingCampaign()),
-                      (Route<dynamic> route) => false);
+                      MaterialPageRoute(builder: (context) => OngoingCampaign()), (Route<dynamic> route) => false);
                 },
               ),
             ],

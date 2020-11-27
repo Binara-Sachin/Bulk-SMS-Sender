@@ -27,7 +27,7 @@ class InstructionsPage extends StatelessWidget {
           style: AppTextStyles.grey_heading03,
         ),
         Text(
-          "This app sends....",
+          "This app is used to send SMS messages in a bulk.\nBut unlike other apps in this category this ap sends SMS from your mobile sim.",
           style: AppTextStyles.black_body01,
         ),
         Text(
@@ -39,44 +39,77 @@ class InstructionsPage extends StatelessWidget {
           style: AppTextStyles.black_body01,
         ),
         Text(
-          "\t\t+94767102855",
+          "\n        442071838750 or +442071838750",
           style: AppTextStyles.grey_body01,
         ),
         Text(
-          "\t\t94767102855",
+          "\nHere are the instructions for converting mobile numbers from your local formatting to E.164 Mobile Number formatting:",
+          style: AppTextStyles.black_body01,
+        ),
+        Text(
+          "\nFor example, here’s a UK-based number in standard local formatting: ",
+          style: AppTextStyles.black_body01,
+        ),
+        Text(
+          "\n        020 7183 8750\n",
           style: AppTextStyles.grey_body01,
         ),
+        // Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Placeholder(
+        //     fallbackHeight: 100.0,
+        //   ),
+        // ),
+        // FadeInImage.assetNetwork(
+        //   placeholder: "assets/into/01.png",
+        //   image: "assets/into/01.png",
+        // ),
+        Image(image: AssetImage("assets/images/intro/01.png")),
         Text(
-          "Where, +94 or 94 is the country code",
+          "\nHere’s the same phone number in E.164 formatting:",
           style: AppTextStyles.black_body01,
         ),
         Text(
-          "76 is the area code",
-          style: AppTextStyles.black_body01,
+          "\n        +442071838750\n",
+          style: AppTextStyles.grey_body01,
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Placeholder(
-            fallbackHeight: 100.0,
-          ),
+        // Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Placeholder(
+        //     fallbackHeight: 100.0,
+        //   ),
+        // ),
+        Image(image: AssetImage("assets/images/intro/02.png")),
+        Text(
+          "\nYou can import number as:",
+          style: AppTextStyles.black_body01,
         ),
         Text(
-          "And ",
-          style: AppTextStyles.black_body01,
+          "\n        +442071838750 or 442071838750",
+          style: AppTextStyles.grey_body01,
         ),
         Text(
           "\nInstructions for importing CSV file\n",
           style: AppTextStyles.grey_heading03,
         ),
         Text(
-          "CSV file type is...",
+          "\nA CSV is a comma-separated values file, which allows data to be saved in a tabular format. CSVs look like a garden-variety spreadsheet but with a \'.csv\' extension. CSV files can be used with most any spreadsheet program, such as Microsoft Excel or Google Spreadsheets.",
           style: AppTextStyles.black_body01,
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Placeholder(
-            fallbackHeight: 100.0,
-          ),
+        Text(
+          "\nYou can just go to MS Excel or Google Spreadsheets and input your numbers as shown below",
+          style: AppTextStyles.black_body01,
+        ),
+        // Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Placeholder(
+        //     fallbackHeight: 100.0,
+        //   ),
+        // ),
+        Image(image: AssetImage("assets/images/intro/03.png")),
+        Text(
+          "\nFinally, save the file in the CSV format and import it to the app in New or Edit campaign page.",
+          style: AppTextStyles.black_body01,
         ),
       ],
     );
