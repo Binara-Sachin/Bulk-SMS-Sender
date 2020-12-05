@@ -31,7 +31,7 @@ class _SettingsPageState extends State<SettingsPage> {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
+      Scaffold.of(context).showSnackBar(
         SnackBar(
           content: Text("Could not launch $url"),
         ),

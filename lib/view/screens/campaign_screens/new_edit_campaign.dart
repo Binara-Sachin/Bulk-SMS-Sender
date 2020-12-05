@@ -282,7 +282,7 @@ class _NewEditCampaignState extends State<NewEditCampaign> {
                           lastRun: widget.campaign.lastRun == null ? DateTime.now() : widget.campaign.lastRun == null,
                         ),
                       );
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      Scaffold.of(context).showSnackBar(SnackBar(
                         content: Text("Campaign Saved"),
                       ));
                     }
